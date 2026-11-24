@@ -1,5 +1,5 @@
 informes/
 logs/
 estado.json
-herramientas/**/*
-!herramientas/**/.mantener
+herramientas/*/*
+!herramientas/*/.mantener
