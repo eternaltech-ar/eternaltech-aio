@@ -1,6 +1,6 @@
-﻿# EternalTech AIO - instalador de una línea.
+# EternalTech AIO - instalador de una linea.
 #   PowerShell como administrador:   irm https://raw.githubusercontent.com/eternaltech-ar/eternaltech-aio/main/instalar.ps1 | iex
-# Baja la última versión del repositorio a C:\EternalTech\AIO (conserva herramientas, informes y logs) y abre el menú.
+# Baja la ultima version del repositorio a C:\EternalTech\AIO (conserva herramientas, informes y logs) y abre el menu.
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
