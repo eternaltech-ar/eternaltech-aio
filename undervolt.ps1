@@ -1,4 +1,4 @@
-﻿﻿<#
+﻿<#
   Undervolt con MSI Afterburner (NVIDIA y AMD).
 
   El ajuste lo hacés vos en Afterburner, como siempre, y guardás cada variante en un perfil (1 a 5).
