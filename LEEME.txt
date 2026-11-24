@@ -1,0 +1,71 @@
+ETERNALTECH AIO - preparación y prueba de PCs armadas
+=====================================================
+
+CÓMO SE USA
+-----------
+  iniciar.cmd      -> menú: elegís cada paso, y en Programas marcás qué instalar.
+  automatico.cmd   -> todo solo: diagnóstico, drivers, programas que falten, optimización,
+                      reinicio (si hace falta; sigue solo al iniciar sesión), pruebas e informe.
+
+Los dos piden permiso de administrador. Si se corre desde el pendrive, el script se copia a
+C:\EternalTech\AIO para seguir funcionando después de los reinicios aunque saques el USB.
+
+QUÉ HACE CADA PASO
+------------------
+1. Diagnóstico: componentes, RAM sin XMP/EXPO o en un solo canal, monitor enchufado al video
+   del mother en vez de la placa, monitor a menos Hz de los que soporta, dispositivos sin driver,
+   Windows sin activar, TPM/Secure Boot. Discos con CrystalDiskInfo: salud (Bueno/Precaución/Malo),
+   temperatura, horas de uso (avisa si un disco "nuevo" tiene horas), y si el SSD/HDD trabaja más lento
+   de lo que soporta (slot M.2 o puerto SATA equivocado). El informe completo queda en logs.
+2. Drivers: primero los .inf del pendrive (para tener red), después los instaladores de chipset
+   y video que pongas en herramientas\instaladores, y por último los drivers de Windows Update.
+3. Programas: primero Office (instalador oficial de Microsoft 365 Apps en español, 64 bits; no se
+   reinstala si ya está). Después, con winget: HWiNFO siempre, y MSI Afterburner + RivaTuner solo si
+   hay placa de video dedicada y no es notebook. Detecta lo que ya está instalado. En automático instala los que tienen
+   "auto": true en config.json; en el menú los marcás vos (por número o por grupo: g:juegos).
+4. Optimizar: punto de restauración, plan Alto rendimiento, sin suspensión, modo juego,
+   programación de GPU por hardware, sin publicidad ni apps promocionadas, quita apps de fábrica
+   (la lista está en config.json).
+5. Pruebas: Cinebench 2026 CPU un núcleo, CPU multinúcleo y GPU, con 10 minutos de carga
+   en las largas (sirve de prueba de estabilidad). Registra temperatura y consumo cada 2 s y corta
+   si la temperatura pasa el límite + 5 °C. Los puntajes quedan como referencia de fábrica.
+6. Informe: HTML para el cliente (queda en el escritorio de la PC) + copia HTML y JSON en la
+   carpeta informes del pendrive. El JSON sirve después para la página de benchmarks.
+7. Undervolt (solo desde el menú, NVIDIA y AMD): hacés los ajustes en MSI Afterburner como siempre
+   y guardás cada variante en un perfil (1 a 5). El script aplica cada perfil, lo prueba con
+   Cinebench GPU (5 minutos, se cambia en config.json) y muestra una tabla contra fábrica: puntaje,
+   consumo, temperatura, reloj y puntos por watt. Recomienda el más eficiente que no pierda más del 3%
+   y elegís con cuál quedarte. Ese perfil queda en el inicio de Afterburner y se aplica al prender la PC.
+   La opción 8 lo saca. Si ya corriste las pruebas (opción 5), usa esa medición de fábrica.
+   Límite de Cinebench GPU: placas de 8 GB o más, y en AMD solo la serie RX 9000.
+9. Finalizar (solo desde el menú, cuando terminaste los tuneos): borra Cinebench, el lector de
+   sensores, drivers e instaladores copiados a la PC. Quedan los informes y lo necesario para que el
+   undervolt se siga aplicando al arrancar.
+
+QUÉ PONER EN EL PENDRIVE (carpeta herramientas)
+-----------------------------------------------
+  cinebench\      Cinebench 2026 de maxon.net (descomprimido; tiene que estar Cinebench.exe).
+  crystaldiskinfo\ CrystalDiskInfo portable (crystalmark.info): la carpeta con DiskInfo64.exe. Si no
+                  está, se instala con winget.
+  lhm\            LibreHardwareMonitor (github.com/LibreHardwareMonitor/LibreHardwareMonitor,
+                  versión net472): la carpeta completa con LibreHardwareMonitorLib.dll y sus .dll.
+                  Sin esto no hay temperatura de CPU (la de GPU NVIDIA se lee igual).
+  drivers\        Drivers .inf sueltos (placas de red y wifi comunes) para equipos sin red.
+  instaladores\   Instaladores de chipset AMD y de video NVIDIA/AMD. Los nombres que reconoce
+                  y los argumentos para instalar en silencio están en config.json (drivers).
+  winget\         Opcional: instalador de "App Installer" (.msixbundle + dependencias .appx)
+                  para Windows 10 recién instalado que no trae winget.
+
+CONFIGURACIÓN
+-------------
+Todo se ajusta en config.json con el Bloc de notas: lista de programas, qué optimizaciones
+aplicar, apps a quitar, duración de las pruebas, límites de temperatura y parámetros del undervolt.
+
+REGISTROS
+---------
+C:\EternalTech\AIO\logs: todo lo que muestra la pantalla y la salida de cada Cinebench.
+
+ANTES DE USARLO CON CLIENTES
+----------------------------
+Es la versión 1: probalo primero en una PC del taller, sobre todo las pruebas de Cinebench
+(lectura del puntaje) y el undervolt. Si algo falla, el log tiene el detalle.

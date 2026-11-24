@@ -1,0 +1,98 @@
+{
+  "_info": "Configuración del AIO de EternalTech. Se puede editar con el Bloc de notas. true = sí, false = no.",
+
+  "taller": {
+    "nombre": "EternalTech",
+    "direccion": "Santiago del Estero 860, Mendoza",
+    "whatsapp": "261 249-8926",
+    "web": "tienda.eternaltech.com.ar"
+  },
+
+  "office": {
+    "_info": "Se instala primero. Es el instalador oficial de Microsoft 365 Apps (se activa con la cuenta del cliente).",
+    "instalar": true,
+    "url": "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365ProPlusRetail&platform=x64&language=es-es&version=O16GA"
+  },
+
+  "programas": [
+    {"id": "REALiX.HWiNFO",                    "nombre": "HWiNFO",                  "grupo": "base",     "auto": true},
+    {"id": "Guru3D.Afterburner",               "nombre": "MSI Afterburner",         "grupo": "base",     "auto": true, "solo_gpu_dedicada": true, "omitir_notebook": true},
+    {"id": "Guru3D.RTSS",                      "nombre": "RivaTuner Statistics Server", "grupo": "base", "auto": true, "solo_gpu_dedicada": true, "omitir_notebook": true},
+    {"id": "Google.Chrome",                    "nombre": "Google Chrome",           "grupo": "base",     "auto": true},
+    {"id": "7zip.7zip",                        "nombre": "7-Zip",                   "grupo": "base",     "auto": true},
+    {"id": "VideoLAN.VLC",                     "nombre": "VLC",                     "grupo": "base",     "auto": true},
+    {"id": "Adobe.Acrobat.Reader.64-bit",      "nombre": "Adobe Acrobat Reader",    "grupo": "base",     "auto": true},
+    {"id": "Microsoft.VCRedist.2015+.x64",     "nombre": "Visual C++ 2015-2022 x64","grupo": "base",     "auto": true},
+    {"id": "Microsoft.VCRedist.2015+.x86",     "nombre": "Visual C++ 2015-2022 x86","grupo": "base",     "auto": true},
+    {"id": "Microsoft.DirectX",                "nombre": "DirectX (runtime)",       "grupo": "base",     "auto": true},
+    {"id": "Microsoft.DotNet.DesktopRuntime.8","nombre": ".NET Desktop Runtime 8",  "grupo": "base",     "auto": true},
+    {"id": "RustDesk.RustDesk",                "nombre": "RustDesk (soporte remoto)","grupo": "base",    "auto": true},
+    {"id": "CPUID.CPU-Z",                      "nombre": "CPU-Z",                   "grupo": "taller",   "auto": false},
+    {"id": "CPUID.HWMonitor",                  "nombre": "HWMonitor",               "grupo": "taller",   "auto": false},
+    {"id": "TechPowerUp.GPU-Z",                "nombre": "GPU-Z",                   "grupo": "taller",   "auto": false},
+    {"id": "CrystalDewWorld.CrystalDiskInfo",  "nombre": "CrystalDiskInfo",         "grupo": "taller",   "auto": false},
+    {"id": "Valve.Steam",                      "nombre": "Steam",                   "grupo": "juegos",   "auto": false},
+    {"id": "EpicGames.EpicGamesLauncher",      "nombre": "Epic Games Launcher",     "grupo": "juegos",   "auto": false},
+    {"id": "Discord.Discord",                  "nombre": "Discord",                 "grupo": "juegos",   "auto": false},
+    {"id": "TheDocumentFoundation.LibreOffice","nombre": "LibreOffice",             "grupo": "oficina",  "auto": false},
+    {"id": "Mozilla.Firefox",                  "nombre": "Firefox",                 "grupo": "oficina",  "auto": false}
+  ],
+
+  "drivers": {
+    "_info": "Los .inf de la carpeta herramientas\\drivers (red, wifi, etc.) se instalan primero. Después se buscan drivers en Windows Update. Los instaladores de chipset/GPU que pongas en herramientas\\instaladores se ejecutan con los argumentos indicados.",
+    "windows_update": true,
+    "instaladores": [
+      {"archivo": "AMD_Chipset*.exe",  "argumentos": "/S",                          "si_cpu": "AMD"},
+      {"archivo": "NVIDIA*.exe",       "argumentos": "-s -noreboot -noeula",        "si_gpu": "NVIDIA"},
+      {"archivo": "amd-software*.exe", "argumentos": "-INSTALL",                    "si_gpu": "AMD"}
+    ]
+  },
+
+  "optimizacion": {
+    "punto_de_restauracion": true,
+    "plan_energia": "alto_rendimiento",
+    "suspension_nunca": true,
+    "modo_juego": true,
+    "gpu_scheduling": true,
+    "quitar_publicidad_y_sugerencias": true,
+    "quitar_apps_preinstaladas": true,
+    "apps_a_quitar": [
+      "Microsoft.BingNews", "Microsoft.BingSearch", "Microsoft.MicrosoftSolitaireCollection",
+      "Microsoft.MicrosoftOfficeHub", "Microsoft.People", "Microsoft.WindowsFeedbackHub",
+      "Microsoft.GetHelp", "Microsoft.Getstarted", "Microsoft.ZuneVideo", "Microsoft.549981C3F5F10",
+      "Clipchamp.Clipchamp", "Microsoft.Todos", "MicrosoftCorporationII.QuickAssist",
+      "Microsoft.PowerAutomateDesktop", "king.com.CandyCrushSaga", "king.com.CandyCrushSodaSaga",
+      "SpotifyAB.SpotifyMusic", "Disney.37853FC22B2CE", "Facebook.Facebook", "BytedanceInc.TikTok"
+    ]
+  },
+
+  "discos": {
+    "_info": "Revisión con CrystalDiskInfo. Más horas que esto en una PC nueva = disco usado.",
+    "horas_max_nuevo": 50,
+    "temp_max": 55
+  },
+
+  "pruebas": {
+    "cinebench_exe": "herramientas\\cinebench\\Cinebench.exe",
+    "cpu_multi": true,
+    "cpu_single": true,
+    "gpu": true,
+    "duracion_minima_seg": 600,
+    "_duracion_info": "Con 600 s cada prueba larga funciona también como prueba de estabilidad (10 minutos de carga sostenida).",
+    "temp_max_cpu": 95,
+    "temp_max_gpu": 88,
+    "intervalo_lectura_seg": 2
+  },
+
+  "undervolt": {
+    "_info": "Se prueban los perfiles 1 a 5 guardados en MSI Afterburner con Cinebench GPU.",
+    "duracion_prueba_seg": 300,
+    "perdida_maxima_pct": 3
+  },
+
+  "descargas": {
+    "_info": "Si una herramienta no está en el pendrive, se baja de estas direcciones (zip). Vacío = no descargar.",
+    "cinebench_zip": "",
+    "librehardwaremonitor_zip": ""
+  }
+}
